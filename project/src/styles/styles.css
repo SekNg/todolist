@@ -1,0 +1,111 @@
+.root {
+    height: 100% !important;
+    overflow: auto;
+}
+
+.customSidebar {
+    height: 100% !important;
+    overflow: auto;
+}
+
+.customPusher {
+    height: 100% !important;
+    overflow: auto;
+}
+
+.customSideBarPushable {
+   background-color: #333333 !important;
+   width: 23em !important;
+}
+
+.customContainer {
+    background-image: url('https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?cs=srgb&dl=pexels-johannes-plenio-1103970.jpg&fm=jpg');
+    background-attachment:fixed !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    height: 100% !important;
+    overflow: auto;
+}
+
+.customCard {
+    margin: 10px 0 0 10px !important;
+    padding: 10px !important;
+    background-color: #f6f6f6 !important;
+    width: 300px !important;
+}
+
+.cardTitle:hover {
+    cursor: pointer;
+}
+
+.customItem {
+    background-color: #fff !important;
+    border-radius: 5px !important;
+    margin-bottom: 10px !important;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px !important;
+    cursor: pointer;
+}
+
+.customMenuItem {
+    font-size: 15px !important;
+}
+
+.customMenuItemIcon {
+    margin-right: 20px !important;
+}
+
+.createNewCardFieldPos {
+    height: 2.8em;
+    width: 18em;
+    border-radius: 2px !important;
+    position: relative;
+    top: 0.8em;
+    margin-left: 1.9em !important;
+}
+
+.createNewCardForm {
+    background-color: #f6f6f6;
+    height: 8em;
+    width: 21.2em;
+    border-radius: 3px !important;
+    position: relative;
+    top: 0.8em;
+    left: 1.9em ;
+    padding: 1em
+}
+
+.createNewCardFormButton {
+    margin-top: 0.7em !important
+}
+
+.createNewCardExitIcon:hover {
+    cursor: pointer;
+}
+
+.itemTitleRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.deleteRecordIcon {
+    border-radius: 50%;
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+.deleteRecordIcon:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.customMenu {
+    background-color: #ff5a5c !important;
+}
+
+.customMenu #navbarButton, .customMenu #navbarLink{
+    color: white !important;
+}
+
+.customMenu #navbarButton:hover {
+    background-color: #ff8e90 !important;
+}
