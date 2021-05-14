@@ -17,7 +17,7 @@ class Navbar extends React.Component {
 					<Icon name="list"/>
 				</Button>
 				<a href="/todolist" className="item" id="navbarLink">
-					<div>To Do List edited</div>
+					<div>To Do List edit</div>
 				</a>
 			</div>
 		);
