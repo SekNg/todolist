@@ -20,7 +20,6 @@ class ToDoCard extends React.Component {
 		deleteCardConfirmOpen: false,
 		editCardTitleOpen: false,
 		newTitleValue: "",
-		showCompleteTasks: false,
 	};
 
 	componentDidMount = () => {
@@ -32,7 +31,7 @@ class ToDoCard extends React.Component {
 
 	componentDidUpdate = (prevProps) => {
 		if (prevProps !== this.props) {
-			this.setState({showCompleteTasks: this.props.showCompleteTasks})
+			this.setState({ showCompleteTasks: this.props.showCompleteTasks });
 		}
 	};
 
@@ -47,14 +46,6 @@ class ToDoCard extends React.Component {
 	deleteCard = () => {
 		this.setState({ deleteCardConfirmOpen: false });
 		this.props.deleteCard(this.props.column);
-	};
-
-	onShowCompleteTasksCheckboxClick = () => {
-		this.props.onShowCompleteTasksCheckboxClick();
-
-		this.setState({
-			showCompleteTasks: !this.state.showCompleteTasks,
-		});
 	};
 
 	renderEditCardTitle = () => {
@@ -116,25 +107,6 @@ class ToDoCard extends React.Component {
 									text="Delete this list"
 									onClick={() => this.setState({ deleteCardConfirmOpen: true })}
 								/>
-								<Dropdown.Item
-									onClick={(e) => this.onShowCompleteTasksCheckboxClick()}
-								>
-									<div>
-										<Checkbox
-											checked={this.state.showCompleteTasks}
-											onMouseDown={(e) =>
-												this.onShowCompleteTasksCheckboxClick()
-											}
-										/>
-										<span
-											style={{ margin: "0 10px", verticalAlign: "text-top" }}
-										>
-											{this.state.showCompleteTasks
-												? "Hide Completed Tasks"
-												: "Show Completed Tasks"}
-										</span>
-									</div>
-								</Dropdown.Item>
 								<CompletedTasksModal onUndoButtonClick={this.onUndoButtonClick}>
 									<Dropdown.Item icon="archive" text="Show Deleted Tasks" />
 								</CompletedTasksModal>
@@ -144,63 +116,57 @@ class ToDoCard extends React.Component {
 				</Menu.Item>
 				{
 					/* Display all completed tasks */
-					this.props.tasks
-						.filter(
-							(task) => this.state.showCompleteTasks || task.done == false
-						)
-						.map((task, index) => {
-							return (
-								<Draggable draggableId={task.id} index={index} key={task.id}>
-									{(provided) => (
-										<div
-											{...provided.draggableProps}
-											{...provided.dragHandleProps}
-											ref={provided.innerRef}
+					this.props.tasks.map((task, index) => {
+						return (
+							<Draggable draggableId={task.id} index={index} key={task.id}>
+								{(provided) => (
+									<div
+										{...provided.draggableProps}
+										{...provided.dragHandleProps}
+										ref={provided.innerRef}
+									>
+										<EditPopup
+											task={task}
+											editRecord={this.props.editRecord}
+											deleteRecord={this.props.deleteRecord}
 										>
-											<EditPopup
-												task={task}
-												editRecord={this.props.editRecord}
-												deleteRecord={this.props.deleteRecord}
-											>
-												<Menu.Item className="customItem">
-													<div
-														/* Cross out the task if it is marked as done */
-														style={{
-															textDecoration: task.done
-																? "line-through"
-																: "none",
-															opacity: task.done ? "50%" : "100%",
-														}}
-													>
-														<h4 className="itemTitleRow">
-															{/* TODOs:
+											<Menu.Item className="customItem">
+												<div
+													/* Cross out the task if it is marked as done */
+													style={{
+														textDecoration: task.done ? "line-through" : "none",
+														opacity: task.done ? "50%" : "100%",
+													}}
+												>
+													<h4 className="itemTitleRow">
+														{/* TODOs:
 															refactor into separate component
 															change state with onCheck
 															make checkbox match the 'done' field of the task
 															*/}
-															<Checkbox
-																label={task.title}
-																checked={task.done}
-																onClick={(e, data) =>
-																	this.props.putToCompleted(e, data, task)
-																}
-																checked={task.done}
-															/>
-															<Icon
-																name="delete"
-																className="deleteRecordIcon"
-																onClick={() => this.props.deleteRecord(task)}
-															/>
-														</h4>
-														<p>{task.description}</p>
-													</div>
-												</Menu.Item>
-											</EditPopup>
-										</div>
-									)}
-								</Draggable>
-							);
-						})
+														<Checkbox
+															label={task.title}
+															checked={task.done}
+															onClick={(e, data) =>
+																this.props.putToCompleted(e, data, task)
+															}
+															checked={task.done}
+														/>
+														<Icon
+															name="delete"
+															className="deleteRecordIcon"
+															onClick={() => this.props.deleteRecord(task)}
+														/>
+													</h4>
+													<p>{task.description}</p>
+												</div>
+											</Menu.Item>
+										</EditPopup>
+									</div>
+								)}
+							</Draggable>
+						);
+					})
 				}
 				{this.props.placeholderAtEndOfList}
 				<Menu.Item>

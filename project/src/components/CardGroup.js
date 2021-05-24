@@ -468,16 +468,6 @@ class CardGroup extends React.Component {
 		await this.props.firebaseSetDataFunc(newState, true);
 	};
 
-	onShowCompleteTasksCheckboxClick = async () => {
-		let newState = {
-			...this.state,
-			showCompleteTasks: !this.state.showCompleteTasks,
-		};
-
-		this.setState(newState);
-		await this.props.firebaseSetDataFunc(newState, true);
-	};
-
 	render() {
 		return (
 			<div className="ui four column doubling stackable grid customContainer">
